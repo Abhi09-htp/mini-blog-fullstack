@@ -45,3 +45,66 @@ export const getBlogs = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+export const updateBlog = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, content } = req.body;
+    const userId = req.user.id;
+
+    const blog = await pool.query(
+      "SELECT * FROM blogs WHERE id = $1",
+      [id]
+    );
+
+    if (blog.rows.length === 0) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+
+    if (blog.rows[0].author_id !== userId) {
+      return res.status(403).json({ message: "Not authorized" });
+    }
+
+    const updated = await pool.query(
+      `UPDATE blogs
+       SET title = $1, content = $2
+       WHERE id = $3
+       RETURNING *`,
+      [title, content, id]
+    );
+
+    res.json(updated.rows[0]);
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const deleteBlog = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId = req.user.id;
+
+    const blog = await pool.query(
+      "SELECT * FROM blogs WHERE id = $1",
+      [id]
+    );
+
+    if (blog.rows.length === 0) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+
+    if (blog.rows[0].author_id !== userId) {
+      return res.status(403).json({ message: "Not authorized" });
+    }
+
+    await pool.query(
+      "DELETE FROM blogs WHERE id = $1",
+      [id]
+    );
+
+    res.json({ message: "Blog deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
