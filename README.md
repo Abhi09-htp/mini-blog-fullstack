@@ -1,139 +1,172 @@
-# Mini Blog – Full Stack Application
+📘 Mini Blogging Platform (Full Stack)
 
-A simple full-stack blogging platform built as a technical assessment project.  
-Implements user authentication, blog CRUD operations, and authorization with a clean separation of frontend and backend.
----
+A full-stack mini blogging platform where users can sign up, log in, and publish blogs.
+All blogs are publicly readable, while editing and deletion are restricted to the author.
 
-## Tech Stack
+🔗 Live Demo
 
-### Backend
-- Node.js
-- Express.js
-- PostgreSQL
-- JWT Authentication
-- bcrypt (password hashing)
+Frontend (Netlify):
+👉 https://magenta-croquembouche-be4681.netlify.app/
 
-### Frontend
-- React
-- Zustand (state management)
-- Custom `useApi` hook for API calls
-- Fetch API
+Backend API (Render):
+👉 https://mini-blog-backend-n92n.onrender.com/
 
----
+🧰 Tech Stack
+Frontend
 
-## Features
+React (Create React App)
 
-### Authentication
-- User registration
-- User login
-- JWT-based authentication
-- Secure password hashing
-- Logout support
+Zustand (state management)
 
-### Blogs
-- Create blog (authenticated users)
-- View all blogs (public, paginated)
-- Edit blog (author only)
-- Delete blog (author only)
-- Pagination with page metadata
+Custom useApi hook
 
-### Authorization
-- Backend enforces author-only edit/delete
-- Frontend hides edit/delete actions for non-authors
+Fetch API
 
----
+Backend
 
-## Project Structure
+Node.js
+
+Express.js
+
+PostgreSQL
+
+JWT Authentication
+
+bcrypt (password hashing)
+
+Deployment
+
+Frontend: Netlify
+
+Backend: Render
+
+Database: Render PostgreSQL
+
+✨ Features
+✅ Authentication
+
+User registration (Email + Password)
+
+User login (Email + Password)
+
+JWT-based authentication
+
+Logged-in user state managed with Zustand
+
+✅ Blog Management
+
+Create new blog (Title + Content)
+
+View all blogs (public)
+
+Pagination support
+
+Edit and delete blogs only by the author
+
+Backend enforces authorization checks
+
+✅ State & Data Handling
+
+Global blog and auth state using Zustand
+
+Custom useApi hook handles:
+
+API requests (GET, POST, PUT, DELETE)
+
+Loading states
+
+Error handling
+
+Store updates
+
+✅ Database
+
+PostgreSQL database
+
+Users and blogs stored with proper relations
+
+Passwords hashed using bcrypt
+
 mini-blog-fullstack/
 │
 ├── backend/
-│ ├── routes/
-│ ├── middleware/
-│ ├── controllers/
-│ ├── db/
-│ └── server.js
+│   ├── src/
+│   │   ├── controllers/
+│   │   ├── middleware/
+│   │   ├── routes/
+│   │   ├── db.js
+│   │   └── index.js
+│   └── package.json
 │
 ├── frontend/
-│ ├── src/
-│ │ ├── components/
-│ │ ├── hooks/
-│ │ ├── store/
-│ │ └── App.jsx
+│   ├── src/
+│   ├── public/
+│   └── package.json
 │
+├── .gitignore
 └── README.md
 
----
+⚙️ Local Setup
 
-## Backend Setup
+1️⃣ Clone the repository
+git clone https://github.com/Abhi09-htp/mini-blog-fullstack.git
+cd mini-blog-fullstack
 
-bash
+2️⃣ Backend setup
 cd backend
 npm install
 
-Create .env file:
-
+Create a .env file in backend/:
 PORT=5000
-DATABASE_URL=postgresql://username:password@localhost:5432/mini_blog_db
+DATABASE_URL=your_postgres_connection_url
 JWT_SECRET=your_secret_key
 
-
-Run backend:
-
+Start backend:
 npm start
 
-
 Backend runs on:
-
 http://localhost:5000
 
-Frontend Setup
-cd frontend
+3️⃣ Frontend setup
+cd ../frontend
 npm install
 npm start
 
-
 Frontend runs on:
-
 http://localhost:3000
 
-API Endpoints
-Auth
+🔐 Security Notes
 
-POST /auth/register
+Passwords are securely hashed using bcrypt
 
-POST /auth/login
+JWT tokens are used for authentication
 
-Blogs
+Protected routes are enforced on the backend
 
-GET /blogs?page=1
+Sensitive environment variables are excluded via .gitignore
 
-POST /blogs (auth required)
+📌 Task Requirement Mapping
 
-PUT /blogs/:id (author only)
+| Requirement             | Status |
+| ----------------------- | ------ |
+| User signup & login     | ✅      |
+| Auth state via Zustand  | ✅      |
+| Blog CRUD operations    | ✅      |
+| Author-only edit/delete | ✅      |
+| Pagination              | ✅      |
+| Custom API hook         | ✅      |
+| Secure password hashing | ✅      |
+| Deployment              | ✅      |
 
-DELETE /blogs/:id (author only)
+📤 Submission Links
 
-Security Notes
+GitHub Repository:
+https://github.com/Abhi09-htp/mini-blog-fullstack
 
-Passwords are hashed using bcrypt
+Live Application:
+https://magenta-croquembouche-be4681.netlify.app/
 
-JWT is verified on protected routes
+👤 Author
 
-Backend does not trust frontend for authorization
-
-Author checks enforced server-side
-
-Assessment Notes
-
-No UI libraries used intentionally (focus on logic)
-
-Clean separation of concerns
-
-Fully functional CRUD with authorization
-
-Ready for review and extension
-
-Author
-
-Abhishek Ashok Mane
+Abhishek Mane
 https://github.com/Abhi09-htp
