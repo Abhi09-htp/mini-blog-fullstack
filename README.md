@@ -1,183 +1,139 @@
 # Mini Blog – Full Stack Application
 
-A simple full-stack blog application built with **React**, **Node.js**, **Express**, and **PostgreSQL**.
-
+A simple full-stack blogging platform built as a technical assessment project.  
+Implements user authentication, blog CRUD operations, and authorization with a clean separation of frontend and backend.
 ---
 
-## 🚀 Features
-
-### Authentication
-- User Registration
-- User Login
-- JWT-based authentication
-- Logout
-
-### Blogs
-- Create a blog post (authenticated users)
-- List blogs with author name
-- Pagination support
-
----
-
-## 🧱 Tech Stack
-
-### Frontend
-- React
-- Fetch API
-- Zustand (state management)
+## Tech Stack
 
 ### Backend
 - Node.js
-- Express
+- Express.js
 - PostgreSQL
 - JWT Authentication
-- bcrypt
-
----
-
-## 📁 Project Structure
-
-# Mini Blog – Full Stack Application
-
-A simple full-stack blog application built with **React**, **Node.js**, **Express**, and **PostgreSQL**.
-
----
-
-## 🚀 Features
-
-### Authentication
-- User Registration
-- User Login
-- JWT-based authentication
-- Logout
-
-### Blogs
-- Create a blog post (authenticated users)
-- List blogs with author name
-- Pagination support
-
----
-
-## 🧱 Tech Stack
+- bcrypt (password hashing)
 
 ### Frontend
 - React
-- Fetch API
 - Zustand (state management)
-
-### Backend
-- Node.js
-- Express
-- PostgreSQL
-- JWT Authentication
-- bcrypt
+- Custom `useApi` hook for API calls
+- Fetch API
 
 ---
 
-## 📁 Project Structure
+## Features
 
+### Authentication
+- User registration
+- User login
+- JWT-based authentication
+- Secure password hashing
+- Logout support
+
+### Blogs
+- Create blog (authenticated users)
+- View all blogs (public, paginated)
+- Edit blog (author only)
+- Delete blog (author only)
+- Pagination with page metadata
+
+### Authorization
+- Backend enforces author-only edit/delete
+- Frontend hides edit/delete actions for non-authors
+
+---
+
+## Project Structure
 mini-blog-fullstack/
+│
 ├── backend/
-│ ├── src/
-│ │ ├── controllers/
-│ │ ├── middleware/
-│ │ ├── routes/
-│ │ ├── db.js
-│ │ └── index.js
-│ ├── package.json
-│ └── .env
+│ ├── routes/
+│ ├── middleware/
+│ ├── controllers/
+│ ├── db/
+│ └── server.js
+│
 ├── frontend/
 │ ├── src/
-│ │ ├── api/
-│ │ ├── pages/
+│ │ ├── components/
+│ │ ├── hooks/
 │ │ ├── store/
-│ │ ├── App.js
-│ │ └── index.js
-│ └── package.json
+│ │ └── App.jsx
+│
 └── README.md
 
 ---
 
-## ⚙️ Environment Variables (Backend)
+## Backend Setup
 
-Create a `.env` file inside `backend/`:
-
-PORT=5000
-JWT_SECRET=supersecretkey
-DATABASE_URL=postgresql://postgres:postgres@localhost:5432/mini_blog_db
-
----
-
-## 🗄️ Database Setup
-
-Create database and tables in PostgreSQL:
-
-sql
-CREATE DATABASE mini_blog_db;
-
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-
-CREATE TABLE users (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  email TEXT UNIQUE NOT NULL,
-  password TEXT NOT NULL
-);
-
-CREATE TABLE blogs (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  title TEXT NOT NULL,
-  content TEXT NOT NULL,
-  author_id UUID REFERENCES users(id),
-  created_at TIMESTAMP DEFAULT NOW()
-);
-
-▶️ How to Run Locally
-
-1️⃣ Start Backend
-
+bash
 cd backend
 npm install
-npm run dev
 
-Backend runs at:
+Create .env file:
+
+PORT=5000
+DATABASE_URL=postgresql://username:password@localhost:5432/mini_blog_db
+JWT_SECRET=your_secret_key
+
+
+Run backend:
+
+npm start
+
+
+Backend runs on:
 
 http://localhost:5000
 
-2️⃣ Start Frontend
+Frontend Setup
 cd frontend
 npm install
 npm start
 
 
-Frontend runs at:
+Frontend runs on:
 
 http://localhost:3000
 
-🧪 App Flow
+API Endpoints
+Auth
 
-Open http://localhost:3000
+POST /auth/register
 
-Register a user
+POST /auth/login
 
-Login
+Blogs
 
-Create a blog
+GET /blogs?page=1
 
-See blogs list
+POST /blogs (auth required)
 
-Logout
+PUT /blogs/:id (author only)
 
-✅ Status
+DELETE /blogs/:id (author only)
 
-Backend: ✅ Working
+Security Notes
 
-Frontend: ✅ Working
+Passwords are hashed using bcrypt
 
-Auth: ✅ Working
+JWT is verified on protected routes
 
-PostgreSQL: ✅ Connected
+Backend does not trust frontend for authorization
 
-👤 Author
+Author checks enforced server-side
 
-Abhi Mane
-GitHub: https://github.com/Abhi09-htp
+Assessment Notes
+
+No UI libraries used intentionally (focus on logic)
+
+Clean separation of concerns
+
+Fully functional CRUD with authorization
+
+Ready for review and extension
+
+Author
+
+Abhishek Ashok Mane
+https://github.com/Abhi09-htp
