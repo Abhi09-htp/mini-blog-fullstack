@@ -1,5 +1,5 @@
 import express from "express";
-import authMiddleware from "../middleware/auth.Middleware.js";
+import authMiddleware from "../middleware/auth.middleware.js";
 import {
   createBlog,
   getBlogs,

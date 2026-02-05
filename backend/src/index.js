@@ -7,6 +7,7 @@ import cors from "cors";
 import authRoutes from "./routes/auth.routes.js";
 import blogRoutes from "./routes/blog.routes.js";
 
+
 const app = express();
 
 /**
