@@ -5,6 +5,7 @@ const BASE_URL = "http://localhost:5000";
 
 export default function useApi() {
   const token = useAuthStore((s) => s.token);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -39,5 +40,10 @@ export default function useApi() {
     }
   };
 
-  return { request, loading, error, clearError };
+  return {
+    request,
+    loading,
+    error,
+    clearError,
+  };
 }

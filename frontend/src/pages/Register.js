@@ -2,7 +2,7 @@ import { useState } from "react";
 import useApi from "../api/useApi";
 
 export default function Register() {
-  const { request, loading, error } = useApi();
+const { request, loading, error, clearError } = useApi();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
