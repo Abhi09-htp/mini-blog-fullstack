@@ -1,7 +1,7 @@
 import { useState } from "react";
 import useAuthStore from "../store/authStore";
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://mini-blog-backend-n92n.onrender.com";
 
 export default function useApi() {
   const token = useAuthStore((s) => s.token);
